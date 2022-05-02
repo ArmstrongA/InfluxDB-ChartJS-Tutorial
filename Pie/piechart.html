@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+        <title>ChartJS Pie chart</title>
+    </head>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <canvas id="pieChart" width="800" height="500"></canvas>
+        </div>
+        <script>
+            const dataset = [1.21, 1.71, 2.24, 3.24, 5.25, 10.29, 10.3];
+            const labels = ["Japan", "Russia", "India", "European Union", "USA", "China", "Others"];
+            const colors = [];
+
+            dataset.forEach((entry, index) => {
+                colors.push("hsla(" + (index + 5) * 50 + ",75%,75%,1)");
+            });
+
+            const dataObj = {
+                labels: labels,
+                datasets: [
+                    {
+                        data: dataset,
+                        backgroundColor: colors,
+                        borderWidth: 3,
+                    },
+                ],
+            };
+
+            const chartObj = {
+                type: "pie",
+                data: dataObj,
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: "CO2 emissions (billions of tonnes)",
+                            font: {
+                                size: 16,
+                            },
+                        },
+                        legend: {
+                            labels: {
+                                boxWidth: 20,
+                            },
+                            position: "right",
+                        },
+                    },
+                },
+            };
+            const ctx = document.getElementById("pieChart").getContext("2d");
+            new Chart(ctx, chartObj);
+        </script>
+    </body>
+</html>

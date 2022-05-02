@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+        <title>ChartJS Polar chart</title>
+    </head>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+    <body>
+        <div class="container">
+            <canvas id="polarChart" width="800" height="400"></canvas>
+        </div>
+        <script>
+            const ctx = document.getElementById("polarChart").getContext("2d");
+            const labels = ["Arctic", "Southern", "North Atlantic", "South Atlantic", "Indian", "South Pacific", "North Pacific"];
+            const volume = [18750, 71800, 146000, 160000, 264000, 329000, 341000]; // km3 * 10^3
+            const chartObj = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: "Volume",
+                        data: volume,
+                        borderWidth: 2,
+                        backgroundColor: ["hsla(260,100%,75%,.7", "hsla(245,100%,75%,.7", "hsla(230,100%,75%,.7", "hsla(210,100%,75%,.7", "hsla(195,100%,75%,.7", "hsla(180,100%,75%,.7", "hsla(165,100%,75%,.7"],
+                    },
+                ],
+            };
+
+            new Chart(ctx, {
+                type: "polarArea",
+                data: chartObj,
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            position: "left",
+                            text: "Volume of water (in 1000 cubic km)",
+                            font: {
+                                size: 16,
+                            },
+                        },
+                        legend: {
+                            labels: {
+                                boxWidth: 20,
+                            },
+                            position: "right",
+                        },
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>
